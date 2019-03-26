@@ -295,44 +295,6 @@ void Body::motion(QImage image)
 //    }
 }
 
-
-//void Body::motion()
-//{
-////    qDebug() << "mo" << QDateTime::currentDateTime();
-
-////    QString lastImage = QString("/tmp/%1.png").arg("cam1");
-////    mCameraThread->image()->save(lastImage,"PNG");
-////    QFile file(lastImage);
-////    telegram->sendPhoto(343583972, &file);
-
-//    QByteArray data;
-//    mCameraThread->data(&data, "PNG");
-
-////    QBuffer buffer(&data);
-////    buffer.open(QIODevice::WriteOnly);
-////    mCameraThread->image()->save(&buffer, "PNG");
-
-//    if(enableTelegram && sendPhotoTo.toUpper().contains("T")){
-//        QString lastImage = QString("/tmp/%1.png").arg("cam1");
-//        mCameraThread->image()->save(lastImage,"PNG");
-//        QFile file(lastImage);
-//        telegram->sendPhoto(343583972, &file);
-//    }
-
-//    if(enableMQTT && sendPhotoTo.toUpper().contains("Q"))
-//        mqtt->publish(QMQTT::Message(0, "image1", data, 2));
-
-//    if(enableDropbox && sendPhotoTo.toUpper().contains("D")){
-//        QString fname = QString("/Alarm/%1.png").arg(QDateTime::currentSecsSinceEpoch());
-//        QDropbox2File db_file(fname, dropbox);
-//        db_file.setOverwrite();
-//        db_file.open(QIODevice::WriteOnly | QIODevice::Truncate);
-//        db_file.write(data);
-//        db_file.flush();
-//        db_file.close();
-//    }
-//}
-
 void Body::mqttReceived(QMQTT::Message message)
 {
     qDebug() << message.topic() << message.payload();
