@@ -11,9 +11,7 @@ LIBS += -lwiringPi
 LIBS += -lQtDropbox2
 
 LIBS += -lopencv_core
-LIBS += -lopencv_video
 LIBS += -lopencv_imgproc
-LIBS += -lopencv_highgui
 
 target.path = /usr/sbin
 INSTALLS += target

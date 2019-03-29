@@ -281,7 +281,7 @@ void Body::motionTimeOut()
 //    IplImage *iimg = QImage2IplImage(&img);
 //    mMotionDetector->input(iimg);
 
-    motionDetector.input(mCameraThread->image());
+    motionDetector.input2(mCameraThread->image());
 }
 
 void Body::motion(QImage image)

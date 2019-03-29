@@ -61,48 +61,48 @@ void MotionDetector::input2(QImage *image)
     mMatFramePre=mMatFrame.clone();
 }
 
-void MotionDetector::input(QImage *image)
-{
-    mMatFrame = Mat(image->height(), image->width(), CV_8UC3, (uchar*)image->bits(), image->bytesPerLine()).clone();
-    cvtColor(mMatFrame, mMatFrame, CV_BGR2RGB);
+//void MotionDetector::input(QImage *image)
+//{
+//    mMatFrame = Mat(image->height(), image->width(), CV_8UC3, (uchar*)image->bits(), image->bytesPerLine()).clone();
+//    cvtColor(mMatFrame, mMatFrame, CV_BGR2RGB);
 
-    if(mMatFrame.empty()) {
-        emit error("Empty frame!!!");
-        return;
-    }
+//    if(mMatFrame.empty()) {
+//        emit error("Empty frame!!!");
+//        return;
+//    }
 
-    //MOG2 bkg subtractor algo
-    mog2.operator ()(mMatFrame,mMatFore);
-//    mog2.getBackgroundImage(mMatBack);
-    cv::erode(mMatFore,mMatFore,cv::Mat());
-    cv::dilate(mMatFore,mMatFore,cv::Mat());
+//    //MOG2 bkg subtractor algo
+//    mog2.operator ()(mMatFrame,mMatFore);
+////    mog2.getBackgroundImage(mMatBack);
+//    cv::erode(mMatFore,mMatFore,cv::Mat());
+//    cv::dilate(mMatFore,mMatFore,cv::Mat());
 
-    findContours(mMatFore,contours,CV_RETR_EXTERNAL,CV_CHAIN_APPROX_NONE);
-    vector<vector<Point> > ::iterator itc = contours.begin();
+//    findContours(mMatFore,contours,CV_RETR_EXTERNAL,CV_CHAIN_APPROX_NONE);
+//    vector<vector<Point> > ::iterator itc = contours.begin();
 
-    //approxPolyDP(contours,contours,20,true);
+//    //approxPolyDP(contours,contours,20,true);
 
-//        cout<<"No of contours : "<<contours.size()<<endl;
-    //Vector<RotatedRect> rects;
+////        cout<<"No of contours : "<<contours.size()<<endl;
+//    //Vector<RotatedRect> rects;
 
-    bool status = false;
+//    bool status = false;
 
-    while(itc!=contours.end()) {
-        //RotatedRectRot tempRect=minAreaRect(Mat(*itc));
-        if(contourArea(*itc)>mMinArea) {
-            status = true;
-            Rect tempRect = boundingRect((Mat(*itc)));
-            mMatOriginal=mMatFrame.clone();
-            rectangle(mMatOriginal,tempRect,Scalar(0,255,0),2);
-        }
-        ++itc;
-    }
+//    while(itc!=contours.end()) {
+//        //RotatedRectRot tempRect=minAreaRect(Mat(*itc));
+//        if(contourArea(*itc)>mMinArea) {
+//            status = true;
+//            Rect tempRect = boundingRect((Mat(*itc)));
+//            mMatOriginal=mMatFrame.clone();
+//            rectangle(mMatOriginal,tempRect,Scalar(0,255,0),2);
+//        }
+//        ++itc;
+//    }
 
-    if(status){
-        QImage img = Mat2QImage(mMatOriginal);
-        emit motion(img);
-    }
-}
+//    if(status){
+//        QImage img = Mat2QImage(mMatOriginal);
+//        emit motion(img);
+//    }
+//}
 
 QImage MotionDetector::Mat2QImage(Mat img) {
     if(img.empty()) {

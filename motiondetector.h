@@ -45,7 +45,7 @@ private:
     Mat mMatOriginal;
     Mat mMatMask;
 
-    BackgroundSubtractorMOG2 mog2;
+//    BackgroundSubtractorMOG2 mog2;
     vector<vector<Point> > contours;
 };
 
